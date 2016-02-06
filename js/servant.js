@@ -34,13 +34,13 @@ function(window,document,body) {
 	var itvId = -1;
 	
 	
-	var m_step_clock	   = -1.0;
-	var m_raf_offset 	   = 0.0;
-	var m_itv_offset_clock = 0.0;
-	var m_raf_offset_clock = 0.0;
-	var m_itv_offset 	   = 0.0;
+	var m_stepClock	       = -1.0;
+	var m_rafOffset 	   = 0.0;
+	var m_itvOffsetClock   = 0.0;
+	var m_rafOffsetClock   = 0.0;
+	var m_itvOffset 	   = 0.0;
 	var m_list 			   = [];
-	var m_perf_offset 	   = 0.0;
+	var m_perfOffset 	   = 0.0;
 
 	//Time last tick.
 	var m_timeLast = -1.0;
@@ -67,12 +67,12 @@ function(window,document,body) {
 
 		var a = Servant;		
 		
-		if (m_step_clock < 0) m_step_clock = p_time;
+		if (m_stepClock < 0) m_stepClock = p_time;
 
 		var t    		 = p_time;		
-		var dt   		 = Math.max(1.0,t - m_step_clock); //in ms
+		var dt   		 = Math.max(1.0,t - m_stepClock); //in ms
 		
-		m_step_clock 	 = t;				
+		m_stepClock 	 = t;				
 		
 		var steps        = p_visible ? 1 : Math.min(62,Math.max(1,Math.floor(dt / 16)));		
 
@@ -104,7 +104,7 @@ function(window,document,body) {
 		var a = Servant;
 		RAFId = window.requestAnimationFrame(m_rafLoop);		
 		var t  = a.hasPerfTime ? window.performance.now() : p_time;								
-		m_step(t - m_raf_offset_clock,true);		
+		m_step(t - m_rafOffsetClock,true);		
 		return true;
 	};
 	
@@ -118,7 +118,7 @@ function(window,document,body) {
 		var v = document.visibilityState != null ? (document.visibilityState != "hidden") : true;
 		if(a.hasReqAnimFrame) if(v) return;				
 		var t = a.hasPerfTime ? window.performance.now() : Date.now();
-		a.step(t - m_itv_offset_clock, v);
+		a.step(t - m_itvOffsetClock, v);
 	};
 	
 	/**
@@ -140,12 +140,12 @@ function(window,document,body) {
 		var a = Servant;
 		a.stop();				
 		
-		m_step_clock = -1.0;		
+		m_stepClock = -1.0;		
 		
-		m_itv_offset_clock = a.hasPerfTime ? window.performance.now() : Date.now();
+		m_itvOffsetClock = a.hasPerfTime ? window.performance.now() : Date.now();
 		itvId = window.setInterval(a.itvLoop, 16);		
 		
-		m_raf_offset_clock = a.hasPerfTime ? window.performance.now() : 0.0;				
+		m_rafOffsetClock = a.hasPerfTime ? window.performance.now() : 0.0;				
 		if (a.hasReqAnimFrame) a.RAFId = window.requestAnimationFrame(m_rafLoop);
 	};
 
