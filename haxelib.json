@@ -2,7 +2,7 @@
   "name": "servanthx",
   "url": "https://github.com/suitjs/servant",
   "license": "MIT",
-  "tags": ["mvc","model","view","controller","mutation","bind","component","webcomponent","thread","worker","timer","iterator"],
+  "tags": ["javascript","suithx","thread","worker","timer","iterator"],
   "description": "Optimize your heavy work with a Servant's help.",
   "version": "1.0.0",
   "releasenotes": "1.0.0",
