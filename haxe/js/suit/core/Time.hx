@@ -14,7 +14,17 @@ extern class Time
 	/**
 	 * Delta time in seconds.
 	 */
-	static public var delta:Float;
+	static public var delta:Float;	
+	
+	/**
+	 * Flag that indicates the page has performance timer features.
+	 */
+	static public var hasPerfTime	  : Bool;
+		
+	/**
+	 * Returns the global time tick.
+	 */
+	static public function clock():Float;
 	
 	
 }

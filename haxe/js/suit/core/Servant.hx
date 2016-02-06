@@ -10,12 +10,7 @@ extern class Servant
 	 * Flag that indicates the page has requestAnimationFrame features.
 	 */
 	static public var hasReqAnimFrame : Bool;
-	
-	/**
-	 * Flag that indicates the page has performance timer features.
-	 */
-	static public var hasPerfTime	  : Bool;
-	
+		
 	/**
 	 * List of active tasks.
 	 */
@@ -49,12 +44,14 @@ extern class Servant
 	/**
 	 * Adds a callback to the execution pool.
 	 */
+	@:overload(function (p_callback : String, p_duration:Float = 9999999999.0, p_delay : Float = 0.0, p_run_on_background:Bool = false):Task{})
 	static public function run(p_callback : Task->Void, p_duration:Float = 9999999999.0, p_delay : Float = 0.0, p_run_on_background:Bool = false):Task;
 	
 	/**
 	 * Waits 'delay' seconds and execute the callback.
 	 */
-	static public function delay(p_callback : Dynamic,p_delay:Float=0.0,p_run_on_background:Bool = false,p_args : Array<Dynamic>=null):Task;
+	@:overload(function (p_callback : String,p_delay:Float=0.0,p_args : Array<Dynamic>=null,p_run_on_background:Bool = false):Task{})
+	static public function delay(p_callback : Dynamic,p_delay:Float=0.0,p_args : Array<Dynamic>=null,p_run_on_background:Bool = false):Task;
 	
 	/**
 	 * Waits 'delay' seconds and sets the variable.

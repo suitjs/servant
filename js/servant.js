@@ -7,9 +7,25 @@ function(window,document,body) {
 
 	"use strict";
 
+	if (Date.now==null) { Date.now = function now() { return new Date().getTime(); } }; 		
+
+	var m_hasPerfTime 	  = window.performance != null;
+
+	/**
+	Returns the current clock time.
+	//*/
+	var m_timeClock = 
+	function timeClock() {
+		return m_hasPerfTime ? window.performance.now() : Date.now();
+	};
+
+
 	return {
-		elapsed: 0.0,
-		delta:   0.0,
+
+		hasPerfTime:     m_hasPerfTime,
+		elapsed: 		 0.0,
+		delta:   		 0.0,
+		clock:   		 m_timeClock,
 	};
 
 }(window,document,document.body);
@@ -24,11 +40,7 @@ function(window,document,body) {
 
 	console.log("Servant> Init v1.0.0");
 
-	if (!Date.now) { Date.now = function now() { return new Date().getTime(); } }; 		
-
-	
 	var m_hasReqAnimFrame = window.requestAnimationFrame != null;
-	var m_hasPerfTime 	  = window.performance != null;
 	
 	var RAFId = -1;
 	var itvId = -1;
@@ -56,7 +68,6 @@ function(window,document,body) {
 		Time.delta  = Math.max(0.01,t - m_timeLast);
 		m_timeLast = t;
 		Time.elapsed += Time.delta;
-
 	};
 
 	/**
@@ -88,7 +99,7 @@ function(window,document,body) {
 
 			}
 			
-			if(!a.hasPerfTime) t += 1000.0/60.0;
+			if(!Time.hasPerfTime) t += 1000.0/60.0;
 		}
 		
 		//Stops when execution list is empty.
@@ -103,7 +114,7 @@ function(window,document,body) {
 
 		var a = Servant;
 		RAFId = window.requestAnimationFrame(m_rafLoop);		
-		var t  = a.hasPerfTime ? window.performance.now() : p_time;								
+		var t  = Time.hasPerfTime ? window.performance.now() : p_time;
 		m_step(t - m_rafOffsetClock,true);		
 		return true;
 	};
@@ -117,7 +128,7 @@ function(window,document,body) {
 		var a = Servant;		
 		var v = document.visibilityState != null ? (document.visibilityState != "hidden") : true;
 		if(a.hasReqAnimFrame) if(v) return;				
-		var t = a.hasPerfTime ? window.performance.now() : Date.now();
+		var t = Time.clock();
 		a.step(t - m_itvOffsetClock, v);
 	};
 	
@@ -142,10 +153,10 @@ function(window,document,body) {
 		
 		m_stepClock = -1.0;		
 		
-		m_itvOffsetClock = a.hasPerfTime ? window.performance.now() : Date.now();
+		m_itvOffsetClock = Time.clock();
 		itvId = window.setInterval(a.itvLoop, 16);		
 		
-		m_rafOffsetClock = a.hasPerfTime ? window.performance.now() : 0.0;				
+		m_rafOffsetClock = Time.hasPerfTime ? window.performance.now() : 0.0;
 		if (a.hasReqAnimFrame) a.RAFId = window.requestAnimationFrame(m_rafLoop);
 	};
 
@@ -186,12 +197,30 @@ function(window,document,body) {
 		return n;
 	};
 
+	var m_invokeCallback = 
+	function invokeCallback(p_callback,p_is_str,p_complete,p_task)
+	{
+
+		if(p_is_str) {
+
+			var type = p_complete ? "complete" : "update";
+			window.Suit.controller.dispatch(p_callback+"@"+type,p_task);
+
+		}
+		else {
+			p_callback(p_task);
+		}
+	};
+
 	/**
 	Executes a callback waiting 'delay' and during 'duration' in seconds.
 	//*/
 	var m_run = 
 	function run(p_callback,p_duration,p_delay,p_run_on_background)	{
 		
+		var isString = typeof(p_callback)=="string";
+		if(window.Suit==null) if(isString) { console.warn("Servant> Suit framework not found!"); return null; }
+
 		var n = {};		
 		n.progress = 0.0;
 		n.duration = p_duration != null ? p_duration : 0xffffff;
@@ -199,11 +228,10 @@ function(window,document,body) {
 		n.update = 
 		function() {	
 
-			if(n.elapsed >= 0.0) p_callback(n);
+			if(n.elapsed >= 0.0) m_invokeCallback(p_callback,isString,false,n);
 			n.elapsed  = Math.min(n.duration,n.elapsed + Time.delta);			
 			n.progress = Math.min(1.0,n.duration <= 0.0 ? 1.0 : (n.elapsed / n.duration));
-			if(n.elapsed >= n.duration) { p_callback(n); Servant.remove(n); return;	}
-
+			if(n.elapsed >= n.duration) { m_invokeCallback(p_callback,isString,true,n); Servant.remove(n); return;	}
 		};
 		Servant.add(n,p_run_on_background);
 		return n;
@@ -213,13 +241,21 @@ function(window,document,body) {
 	Waits 'delay' seconds and then Executes the callback.
 	//*/
 	var m_delay =
-	function delay(p_callback,p_delay,p_run_on_background,p_args) {		
+	function delay(p_callback,p_delay,p_args,p_run_on_background) {		
 
 		var al = p_args==null ? [] : p_args;
 		//for(var i=3;i<arguments.length;i++) al.push(arguments[i]);		
 		return Servant.run(function(n) {			
 
-			p_callback.apply(window,al);
+			var isString = typeof(p_callback)=="string";
+			if(window.Suit==null) if(isString) { console.warn("Servant> Suit framework not found!"); return ; }
+
+			if(isString) {				
+				window.Suit.controller.dispatch(p_callback+"@complete",p_args);
+			}
+			else {
+				p_callback.apply(window,al);
+			}			
 
 		},0.0,p_delay ? p_delay : 0.0,p_run_on_background);	
 	};
@@ -259,8 +295,7 @@ function(window,document,body) {
 
 	return {
 
-		hasReqAnimFrame: m_hasReqAnimFrame,
-		hasPerfTime:     m_hasPerfTime,
+		hasReqAnimFrame: m_hasReqAnimFrame,		
 		list:            m_list, 
 
 		start:   m_start,
