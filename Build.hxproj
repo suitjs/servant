@@ -43,6 +43,7 @@
     <compile path="WebBundleTest.hx" />
     <compile path="HaxeTest.hx" />
     <compile path="source\Main.hx" />
+    <compile path="haxe\Main.hx" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
