@@ -198,8 +198,7 @@ function(window,document,body) {
 	};
 
 	var m_invokeCallback = 
-	function invokeCallback(p_callback,p_is_str,p_complete,p_task)
-	{
+	function invokeCallback(p_callback,p_is_str,p_complete,p_task) {
 
 		if(p_is_str) {
 
@@ -219,7 +218,7 @@ function(window,document,body) {
 	function run(p_callback,p_duration,p_delay,p_run_on_background)	{
 		
 		var isString = typeof(p_callback)=="string";
-		if(window.Suit==null) if(isString) { console.warn("Servant> Suit framework not found!"); return null; }
+		if(window.Suit==null) if(isString) { console.error("Servant> Suit framework not found!"); return null; }
 
 		var n = {};		
 		n.progress = 0.0;
@@ -243,12 +242,12 @@ function(window,document,body) {
 	var m_delay =
 	function delay(p_callback,p_delay,p_args,p_run_on_background) {		
 
+		var isString = typeof(p_callback)=="string";
+		if(window.Suit==null) if(isString) { console.error("Servant> Suit framework not found!"); return ; }
+
 		var al = p_args==null ? [] : p_args;
 		//for(var i=3;i<arguments.length;i++) al.push(arguments[i]);		
 		return Servant.run(function(n) {			
-
-			var isString = typeof(p_callback)=="string";
-			if(window.Suit==null) if(isString) { console.warn("Servant> Suit framework not found!"); return ; }
 
 			if(isString) {				
 				window.Suit.controller.dispatch(p_callback+"@complete",p_args);
