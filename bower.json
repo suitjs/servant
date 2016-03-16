@@ -6,7 +6,7 @@
 	"Gustavo Allebrandt <gustavoallebrandt@gmail.com>"
   ],
   "description": "Optimize your heavy work with a Servant's help.",
-  "main": ["deploy/js/servant.js"],
+  "main": ["js/servant.js"],
   "moduleType": [],
   "keywords": [
     "javascript",
