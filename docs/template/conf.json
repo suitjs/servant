@@ -1,0 +1,44 @@
+{
+	"tags": {
+		"allowUnknownTags" : true
+	},
+    
+	"plugins": ["plugins/markdown"],
+	"templates": {
+        "applicationName": "SuitJS - Servant",
+        "navigationImage": "http://www.suitjs.com/public/images/logo-64.png",
+		"cleverLinks":      true,
+		"monospaceLinks":   true,
+        "linenums":         true,
+		"disqus":           "suitjs",
+		"googleAnalytics":  "UA-75143185-1",        
+        
+		"default": {
+			"outputSourceFiles" : true
+		},
+        
+		"openGraph": {
+			"title":        "SuitJS - Servant",
+			"type":         "website",
+			"image":        "http://www.suitjs.com/public/images/logo-suitjs.svg?v=2",
+			"site_name":    "SuitJS - Servant",
+			"url":          "http://suitjs.com/docs/servant/"
+		},
+        
+		"meta": {
+			"title":        "SuitJS - Servant",
+			"description":  "Keep your valuables well stored.",
+			"keyword":      "javascript,framework,mvc,suitjs,haxe,typescript,servant,requestAnimationFrame,update,timer,frontend,task,manager"                
+		},
+        
+        "link":{
+            "favicon": "http://suitjs.com/favicon.png"
+        }
+        
+	},
+	"markdown": {
+		"parser":   "gfm",
+		"hardwrap": true,
+		"tags":     ["examples"]
+	}
+}

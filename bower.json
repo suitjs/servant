@@ -3,7 +3,7 @@
   "homepage": "https://github.com/suitjs/servant",
   "authors": [
     "Eduardo Dias da Costa <eduardo@thelaborat.org>",
-	"Gustavo Allebrandt <gustavoallebrandt@gmail.com>",
+	"Gustavo Allebrandt <gustavoallebrandt@gmail.com>"
   ],
   "description": "Optimize your heavy work with a Servant's help.",
   "main": ["deploy/js/servant.js"],
@@ -20,7 +20,7 @@
     "timer",	      
     "frontend",
     "task",
-    "manager",    
+    "manager"
   ],
   
   "ignore": [	

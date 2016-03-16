@@ -1,7 +1,6 @@
 node_modules
 npm-debug.log
-*.bat
-*.html
-lapel-haxe.js
+test.html
+servant-haxe.js
 Main.hx
 old/
