@@ -4,7 +4,7 @@
 * @class
 * @type Time
 */
-var Time;
+var Time = {};
 (function(window,document,body) {
 
 	"use strict";
@@ -44,7 +44,7 @@ var Time;
 * @class
 * @type Servant
 */
-var Servant;
+var Servant = {};
 (function(window,document,body) {
 
 	"use strict";
