@@ -22,18 +22,28 @@ var Time = {};
     /**
      * Elapsed time in seconds since `Servant` started.
      * @type {Number}
+     * @example
+     * Servant.run(function(){ console.log(Time.elapsed); },3);
      */
     Time.elapsed = 0.0;
     
      /**
      * Time in seconds since the last frame.
      * @type {Number}
+     * @example
+     * var t=0.0;
+     * Servant.run(function () {
+     *    t += Time.delta;
+     *    console.log(t);
+     * },3);
      */
     Time.delta = 0.0;
     
     /**
      * Returns the current clock time.
      * @returns {Number} - The current time in seconds.
+     * @example
+     * Servant.run(function(){ console.log(Time.clock()); },3);
      */
     Time.clock = function timeClock() { return m_hasPerfTime ? window.performance.now() : Date.now(); };
 
@@ -190,6 +200,16 @@ var Servant = {};
      * Adds a Node to the execution pool.
 	 * @param  {ServantNode} p_node - Reference to a execution node.
 	 * @param  {?Boolean} p_run_on_background - Flag that indicates the loop will keep running when the tab isn't focused.
+     * @example
+     * var duration = 3.0;
+     * var n = null;
+     * n =  {
+     *  update: function() {
+     *      duration -= Time.delta; //Decrements the duration
+     *      if(duration<=0) Servant.remove(n);
+     *   }  
+     * };
+     * Servant.add(n);
 	 */
 	Servant.add =
 	function add(p_node,p_run_on_background) {
@@ -204,7 +224,8 @@ var Servant = {};
 	
 	/**
      * Removes a Node of the execution pool.    
-	 * @param  {ServantNode} p_node - Reference to a execution node.	 
+	 * @param  {ServantNode} p_node - Reference to a execution node.
+     * @see Servant.add	 
 	 */
 	Servant.remove =
 	function remove(p_node)	{
@@ -253,6 +274,26 @@ var Servant = {};
 	 * @param  {?Number} p_delay - Delay in seconds. Defaults to `0.0`.
 	 * @param  {?Boolean} p_run_on_background - Flag that indicates the loop will keep running when the tab isn't focused.
      * @returns {ServantUpdateNode} - The created execution node.
+     * @example
+     * //Using 'function'.
+     * Servant.run(function(node){
+     *  if(node.elapsed >= 3.0) console.log("Time Out!");
+     * }3);
+     * 
+     * //Using SuitJS (don't forget to add 'suitjs.js' on your page)
+     * 
+     * var c = {
+     *  on: function(n) {
+     *      switch(n.path) {
+     *          case "servant-callback@update": console.log(n.data.elapsed); break;
+     *      }
+     *  }
+     * };
+     * 
+     * SuitJS.controller.add(c);
+     * 
+     * Servant.run("servant-callback",3);
+     * 
 	 */    
 	Servant.run =
 	function run(p_callback,p_duration,p_delay,p_run_on_background)	{
@@ -282,6 +323,24 @@ var Servant = {};
 	 * @param  {?Number} p_delay - Delay in seconds. Defaults to `0.0`.
 	 * @param  {?Boolean} p_run_on_background - Flag that indicates the loop will keep running when the tab isn't focused.
      * @returns {ServantUpdateNode} - The created execution node.
+     * @example
+     * //Using 'function'
+     * //Waits 3s and calls the function with the argument list.
+     * Servant.delay(function(a,b){
+     *  console.log(a+" "+b); 
+     * },3,["Hello","world"]);
+     * 
+     * var c = {
+     *  on: function(n) {
+     *      switch(n.path) {
+     *          case "servant-callback@complete": console.log(n.data[0]+" "+n.data[1]); break;
+     *      }
+     *  }
+     * };
+     * 
+     * SuitJS.controller.add(c);
+     * 
+     * Servant.delay("servant-callback",3);
 	 */ 
 	Servant.delay =
 	function delay(p_callback,p_delay,p_args,p_run_on_background) {		
@@ -311,6 +370,9 @@ var Servant = {};
      * @param  {?Number} p_delay - Delay in seconds. Defaults to `0.0`.
 	 * @param  {?Boolean} p_run_on_background - Flag that indicates the loop will keep running when the tab isn't focused.
      * @returns {ServantUpdateNode} - The created execution node.
+     * @example
+     * var o = {count: 0};
+     * Servant.set(o,"count",10,3); //Sets 'o.count' to 10 after 3s
 	 */    
 	Servant.set = 
 	function set(p_target,p_property,p_value,p_delay,p_run_on_background) {
@@ -338,7 +400,14 @@ var Servant = {};
 	 * @param {?Number} p_timeout - Timeout in seconds. Stops the execution after some time. Defaults to `0xffffff`(infinite).
 	 * @param {?Boolean} p_run_on_background - Flag that indicates the loop will keep running when the tab isn't focused.
      * @returns {ServantUpdateNode} - The created execution node.
-	 */
+     * @example
+     * var list = [1,2,3,4,5,6];
+     * //Will handle 1 element per frame.
+     * //See the time stamp per iteration
+     * Servant.iterate(function (it,i,len) {
+     *  console.log(i+"> "+it+" @ "+Time.elapsed);
+     * },list,1);
+	 */    
 	Servant.iterate = 
 	function iterate(p_callback,p_list,p_step,p_timeout,p_run_on_background) {
 

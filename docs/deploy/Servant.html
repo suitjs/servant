@@ -172,7 +172,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line47">line 47</a>
+            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line57">line 57</a>
         </div>
         
     </div>
@@ -355,7 +355,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line194">line 194</a>
+            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line214">line 214</a>
         </div>
         
     </div>
@@ -493,6 +493,14 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>var duration = 3.0;<br>var n = null;<br>n =  {<br> update: function() {<br>     duration -= Time.delta; //Decrements the duration<br>     if(duration&lt;=0) Servant.remove(n);<br>  }<br>};<br>Servant.add(n);</p></code></pre>
+    
+
+    
 </dd>
 
         
@@ -506,7 +514,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line187">line 187</a>
+            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line197">line 197</a>
         </div>
         
     </div>
@@ -577,7 +585,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line286">line 286</a>
+            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line345">line 345</a>
         </div>
         
     </div>
@@ -779,6 +787,17 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>//Using 'function'<br>//Waits 3s and calls the function with the argument list.<br>Servant.delay(function(a,b){<br> console.log(a+&quot; &quot;+b);<br>},3,[&quot;Hello&quot;,&quot;world&quot;]);</p>
+<p>var c = {<br> on: function(n) {<br>     switch(n.path) {<br>         case &quot;servant-callback@complete&quot;: console.log(n.data[0]+&quot; &quot;+n.data[1]); break;<br>     }<br> }<br>};</p>
+<p>SuitJS.controller.add(c);</p>
+<p>Servant.delay(&quot;servant-callback&quot;,3);</p></code></pre>
+    
+
+    
 </dd>
 
         
@@ -792,7 +811,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line342">line 342</a>
+            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line411">line 411</a>
         </div>
         
     </div>
@@ -1049,6 +1068,14 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>var list = [1,2,3,4,5,6];<br>//Will handle 1 element per frame.<br>//See the time stamp per iteration<br>Servant.iterate(function (it,i,len) {<br> console.log(i+&quot;&gt; &quot;+it+&quot; @ &quot;+Time.elapsed);<br>},list,1);</p></code></pre>
+    
+
+    
 </dd>
 
         
@@ -1062,7 +1089,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line209">line 209</a>
+            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line230">line 230</a>
         </div>
         
     </div>
@@ -1149,6 +1176,13 @@
     
     
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Servant.html#.add">Servant.add</a></li>
+        </ul>
+    </dd>
+    
     
     
 </dl>
@@ -1178,7 +1212,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line257">line 257</a>
+            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line298">line 298</a>
         </div>
         
     </div>
@@ -1410,6 +1444,18 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>//Using 'function'.<br>Servant.run(function(node){<br> if(node.elapsed &gt;= 3.0) console.log(&quot;Time Out!&quot;);<br>}3);</p>
+<p>//Using SuitJS (don't forget to add 'suitjs.js' on your page)</p>
+<p>var c = {<br> on: function(n) {<br>     switch(n.path) {<br>         case &quot;servant-callback@update&quot;: console.log(n.data.elapsed); break;<br>     }<br> }<br>};</p>
+<p>SuitJS.controller.add(c);</p>
+<p>Servant.run(&quot;servant-callback&quot;,3);</p></code></pre>
+    
+
+    
 </dd>
 
         
@@ -1423,7 +1469,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line315">line 315</a>
+            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line377">line 377</a>
         </div>
         
     </div>
@@ -1678,6 +1724,14 @@
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>var o = {count: 0};<br>Servant.set(o,&quot;count&quot;,10,3); //Sets 'o.count' to 10 after 3s</p></code></pre>
+    
+
+    
 </dd>
 
         
@@ -1691,7 +1745,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line164">line 164</a>
+            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line174">line 174</a>
         </div>
         
     </div>
@@ -1762,7 +1816,7 @@
     
         
         <div class="tag-source">
-            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line182">line 182</a>
+            <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html">js/servant.doc.js</a>, <a href="g__development_project_web_thelab_suitjs_servant_js_servant.doc.js.html#line192">line 192</a>
         </div>
         
     </div>
@@ -1845,7 +1899,7 @@
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Mar 29 2016 03:22:11 GMT-0300 (E. South America Standard Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Mar 29 2016 04:02:26 GMT-0300 (E. South America Standard Time)
         </footer>
     </div>
 </div>
