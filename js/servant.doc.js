@@ -330,6 +330,8 @@ var Servant = {};
      *  console.log(a+" "+b); 
      * },3,["Hello","world"]);
      * 
+     * //Using SuitJS
+     * 
      * var c = {
      *  on: function(n) {
      *      switch(n.path) {
