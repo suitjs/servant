@@ -342,7 +342,7 @@ var Servant = {};
      * 
      * SuitJS.controller.add(c);
      * 
-     * Servant.delay("servant-callback",3);
+     * Servant.delay("servant-callback",3,["Hello","world"]);
 	 */ 
 	Servant.delay =
 	function delay(p_callback,p_delay,p_args,p_run_on_background) {		
