@@ -1,5 +1,5 @@
 {
-  "name": "suitjs/servant",
+  "name": "suitjs-servant",
   "homepage": "https://github.com/suitjs/servant",
   "authors": [
     "Eduardo Dias da Costa <eduardo@thelaborat.org>",
@@ -7,7 +7,7 @@
   ],
   "description": "Optimize your heavy work with a Servant's help.",
   "main": ["js/servant.js"],
-  "moduleType": [],
+  "moduleType": "globals",
   "keywords": [
     "javascript",
     "typescript",
@@ -25,18 +25,20 @@
   
   "ignore": [	
 	"**/.*",
-	"old/",
+    "docs/",
+    "haxe/",
+    "typescript/",	
 	"node_modules/",
 	"bower_components/",
-	"source/",	
-	"*.hxproj",
-	"test.html",	
+	"source/",
+    "LICENSE.md",	
 	"README.md",
-	"bower.json",
-	"haxelib.json",
-	"LICENSE"	
+	"*.json",
+    "*.bat",
+    "*.sh",	
+    "*.hxproj",
+    "*.hxml"	
   ],
 
-  "license": "MIT",
-  "private": true
+  "license": "MIT"  
 }

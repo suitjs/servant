@@ -13,7 +13,7 @@
     
     <meta property="og:title" content="SuitJS - Servant"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:image" content="http://www.suitjs.com/public/images/logo-suitjs.svg?v=2"/>
+    <meta property="og:image" content="http://www.suitjs.com/img/logo-og-big.png"/>
     <meta property="og:site_name" content="SuitJS - Servant"/>
     <meta property="og:url" content="http://suitjs.com/docs/servant/"/>
     
@@ -30,7 +30,7 @@
     
     
     <script>
-    var config = {"monospaceLinks":true,"cleverLinks":true,"applicationName":"SuitJS - Servant","navigationImage":"http://www.suitjs.com/public/images/logo-64.png","linenums":true,"disqus":"suitjs","googleAnalytics":"UA-75143185-1","default":{"outputSourceFiles":true},"openGraph":{"title":"SuitJS - Servant","type":"website","image":"http://www.suitjs.com/public/images/logo-suitjs.svg?v=2","site_name":"SuitJS - Servant","url":"http://suitjs.com/docs/servant/"},"meta":{"title":"SuitJS - Servant","description":"Optimize your heavy work with a Servant's help.","keyword":"javascript,framework,mvc,suitjs,haxe,typescript,servant,requestAnimationFrame,update,timer,frontend,task,manager"},"link":{"favicon":"http://suitjs.com/favicon.png"}};
+    var config = {"monospaceLinks":true,"cleverLinks":true,"applicationName":"SuitJS - Servant","navigationImage":"http://www.suitjs.com/img/logo-64.png","linenums":true,"disqus":"suitjs","googleAnalytics":"UA-75143185-1","default":{"outputSourceFiles":true},"openGraph":{"title":"SuitJS - Servant","type":"website","image":"http://www.suitjs.com/img/logo-og-big.png","site_name":"SuitJS - Servant","url":"http://suitjs.com/docs/servant/"},"meta":{"title":"SuitJS - Servant","description":"Optimize your heavy work with a Servant's help.","keyword":"javascript,framework,mvc,suitjs,haxe,typescript,servant,requestAnimationFrame,update,timer,frontend,task,manager"},"link":{"favicon":"http://suitjs.com/favicon.png"}};
     </script>
     
 
@@ -54,7 +54,7 @@
 <div class="navigation">
 
     <div style="text-align: center; margin-top: 5px;">
-        <img src="http://www.suitjs.com/public/images/logo-64.png" alt="SuitJS - Servant" style="display: inline">
+        <img src="http://www.suitjs.com/img/logo-64.png" alt="SuitJS - Servant" style="display: inline">
     </div>
 
     <h3 class="applicationName"><a href="index.html">SuitJS - Servant</a></h3>
@@ -165,7 +165,91 @@
 
 
     <section>
-        <article class="readme"><h1>Servant</h1><p>Optimize your heavy work with a Servant's help.</p></article>
+        <article class="readme"><p><a target="_blank" href="http://www.suitjs.com/"><img src="http://www.suitjs.com/img/logo-suitjs.svg?v=2" width="256" alt="SuitJS"></a></p>
+<h1>Servant</h1><p>Optimize your heavy work with a Servant's help.</p>
+<ul>
+<li>Servant allows the creation of update loops</li>
+<li>Its uses the <code>requestAnimationFrame</code> API<ul>
+<li>Still, fallbacks to <code>setInterval</code> if needed</li>
+</ul>
+</li>
+<li>It keeps working consistently when the window blurs<ul>
+<li>RAF runs at 1FPS while the window isn't focused</li>
+</ul>
+</li>
+<li>Handle high number of operations by distributing them in more frames</li>
+<li>Can work as a mini game engine</li>
+<li>Can be used for tween and animation features</li>
+<li>Integrates with <a target="_blank" href="http://www.suitjs.com">SuitJS</a> notifications</li>
+</ul>
+<h1>Install</h1><h4>Download</h4><ul>
+<li>Download either the <code>servant.js</code> or <code>servant.min.js</code> sources.</li>
+<li>Add the tag <code>&lt;script src=&quot;js/suitjs/servant.js&quot;&gt;&lt;/script&gt;</code></li>
+</ul>
+<h4>Bower</h4><ul>
+<li>Servant is available as bower package.</li>
+<li>Run <code>bower install suitjs-servant</code></li>
+<li>It will install all script versions.</li>
+<li>Add the tag <code>&lt;script src=&quot;bower_components/suitjs-servant/js/servant.js&quot;&gt;&lt;/script&gt;</code></li>
+</ul>
+<h4>CDN</h4><ul>
+<li>TBD</li>
+</ul>
+<h1>Usage</h1><p>After adding the script tag, the <code>Servant</code> global variable will be available.  </p>
+<h4>Hello World</h4><p>Servant is really simple to use. Just follow the snippets bellow:</p>
+<p><strong> Custom Update Callback </strong></p>
+<ul>
+<li>More about <a target="_blank" href="http://www.suitjs.com/docs/servant/global.html#ServantUpdateNode">ServantUpdateNode</a>  </li>
+</ul>
+<pre class="prettyprint source lang-js"><code>//Will log 3 seconds of execution.
+//Use the 'node' argument to get more information.
+Servant.run(function(node) { 
+    console.log(node.elapsed);
+    if(node.elapsed>=3.0) console.log(&quot;finished!&quot;); 
+},3);
+
+//Will trigger a 'update.game' SuitJS notification on all its Controllers
+//The 'duration' will last 2^32 seconds :)
+Servant.run(&quot;update.game&quot;,0xffffff);
+
+//Will wait 3 seconds and trigger the function.
+//Arguments can be passed in an array at the end.
+Servant.delay(function(p0,p1) {
+    console.log(p0+&quot; &quot;+p1);
+},3.0,[&quot;Triggered&quot;,&quot;Now!&quot;]);
+
+//Target
+var o = { count: 0 };
+//Will wait 3s and set 'o.count = 10'
+Servant.set(o,&quot;count&quot;,10,3);
+
+var list = [1,2,3,4,5,6];
+
+//Will handle 1 element per frame.
+//See the time stamp per iteration
+Servant.iterate(function (it,i,len) {
+    console.log(i+&quot;> &quot;+it+&quot; @ &quot;+Time.elapsed);
+},list,1);
+
+//Will handle 2 elements per frame.
+//See the time stamp per iteration
+Servant.iterate(function (it,i,len) {
+    console.log(i+&quot;> &quot;+it+&quot; @ &quot;+Time.elapsed);
+},list,2);
+
+//Custom node
+//Runs for 3s and stop.
+var duration = 3.0;
+var n=null;
+n =  {
+  update: function() {
+      duration -= Time.delta; //Decrements the duration
+      if(duration&lt;=0) Servant.remove(n);
+  }  
+};
+
+Servant.add(n);</code></pre><h1>Documentation</h1><p>For in depth information of the API, visit the <strong><a target="_blank" href="http://www.suitjs.com/docs/lapel/">documentation</a></strong>. </p>
+<h1>Examples</h1><p>Usage examples can be found at <strong><a target="_blank" href="http://codepen.io/collection/XOyEpq/">CodePen</a></strong>.</p></article>
     </section>
 
 
@@ -182,7 +266,7 @@
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Mar 16 2016 05:38:22 GMT-0300 (E. South America Standard Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Mar 29 2016 03:22:11 GMT-0300 (E. South America Standard Time)
         </footer>
     </div>
 </div>

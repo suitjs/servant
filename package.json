@@ -1,0 +1,29 @@
+{
+  "name": "suitjs-servant",
+  "version": "1.0.0",
+  "description": "Optimize your heavy work with a Servant's help.", 
+  
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suitjs/servant"
+  },
+  "author": "Eduardo Dias da Costa  <eduardo@thelaborat.org> https://github.com/eduardo-costa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/suitjs/servant/issues"
+  },
+  "homepage": "http://www.suitjs.com",
+  "dependencies": {
+    
+  },
+  "scripts": {
+    "build-docs":   "jsdoc ./js/servant.doc.js -d docs/deploy/ -t docs/template/ -c docs/template/conf.json -r README.md",
+    "build-js":     "uglifyjs js/servant.doc.js -b -o js/servant.js && uglifyjs js/servant.doc.js -o js/servant.min.js",
+    "build-haxe":   "haxe build.hxml",
+    "serve":        "http-server ./ -p 8081",
+    "build":        "npm run build-docs && npm run build-js"   
+  },
+  "contributors": [
+    "Gustavo Allebrandt <gustavoallebrandt@gmail.com"
+  ]
+}
