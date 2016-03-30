@@ -27,6 +27,10 @@ Optimize your heavy work with a Servant's help.
 #### CDN
 * TBD
 
+#### Build
+* Run `npm run init` once
+* `npm run build`
+
 # Usage
 After adding the script tag, the `Servant` global variable will be available.  
  
@@ -90,7 +94,7 @@ Servant.add(n);
 ```
 
 # Documentation
-For in depth information of the API, visit the **[documentation](http://www.suitjs.com/docs/servant/)**. 
+For in depth information of the API, visit the **[documentation](http://www.suitjs.com/docs/)**. 
 
 # Examples
 Usage examples can be found at **[CodePen](http://codepen.io/collection/XOyEpq/)**.
