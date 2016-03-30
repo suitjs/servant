@@ -357,3 +357,9 @@ footer {
   color: gray;
 }
 
+code>p { margin-bottom: 0px; }
+
+.nullable {
+    font-weight: bolder;
+    color: #f00;
+}

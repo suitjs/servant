@@ -90,7 +90,7 @@ Servant.add(n);
 ```
 
 # Documentation
-For in depth information of the API, visit the **[documentation](http://www.suitjs.com/docs/lapel/)**. 
+For in depth information of the API, visit the **[documentation](http://www.suitjs.com/docs/servant/)**. 
 
 # Examples
 Usage examples can be found at **[CodePen](http://codepen.io/collection/XOyEpq/)**.
